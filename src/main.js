@@ -33,6 +33,14 @@ async function onSearchFormSubmit(e) {
   searchQuery = e.currentTarget.elements.search.value.trim();
   e.currentTarget.elements.search.value = '';
 
+  if (!searchQuery) {
+    return iziToast.error({
+      title: '',
+      message: 'The field can not be empty!!!',
+      position: 'topRight',
+      timeout: 3000,
+    });
+  }
   imageList.innerHTML = '';
   toggleLoader();
 
@@ -75,6 +83,7 @@ function renderCards({ hits }) {
   if (!hits.length) {
     iziToast.error({
       title: 'Error',
+      timeout: 3000,
       message:
         'Sorry, there are no images matching your search query. Please try again!',
       position: 'topRight',
